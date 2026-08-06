@@ -1,0 +1,92 @@
+schema: spec-driven
+
+context: |
+  Project: Moonshop backend for the LovaMart ecommerce frontend.
+  Main API reference: API_SPEC_DETAILED.md. Treat it as the intended product/API contract unless current code clearly differs.
+
+  Tech stack:
+  - Java 17.
+  - Spring Boot 4.1.0.
+  - Spring Web MVC REST APIs under /api.
+  - Spring Security with JWT bearer authentication.
+  - OAuth2 Resource Server dependency is present for JWT decoding.
+  - Spring Data JPA with MySQL.
+  - Bean Validation for request DTO validation.
+  - Lombok for boilerplate.
+  - MapStruct for DTO/entity mapping.
+  - springdoc-openapi for Swagger/OpenAPI UI.
+
+  Current implementation state:
+  - Implemented areas are mainly auth, user/profile, common error handling, security config, enums, and app initialization.
+  - Product, category, cart, order, notification, chat, upload, and most admin APIs are described in API_SPEC_DETAILED.md but may not be implemented yet.
+  - application.properties contains Redis, RabbitMQ, and Mail configuration keys, but the current pom.xml does not yet include the corresponding Spring starters. Treat these integrations as planned or partially prepared unless code/dependencies are added in the change.
+
+  API conventions:
+  - Base URL is /api.
+  - Authenticated requests use Authorization: Bearer <accessToken>.
+  - Public endpoints include auth register/login/refresh-token and public product/category browsing.
+  - USER endpoints include cart, orders, notifications/profile/chat where applicable.
+  - ADMIN endpoints live under /api/admin/**.
+  - Errors use ErrorResponse with code, message, details, timestamp, and path.
+  - Validation failures return VALIDATION_ERROR with field-level details.
+  - Prefer explicit error codes from ErrorCode and messages from ErrorMessage.
+  - Current controllers usually return raw response DTOs via ResponseEntity rather than wrapping all responses in ApiResponse.
+
+  Domain conventions:
+  - Roles: USER, ADMIN.
+  - UserStatus: ACTIVE, BLOCKED.
+  - CategoryStatus/ProductStatus: ACTIVE, INACTIVE.
+  - OrderStatus: PENDING, CONFIRMED, PROCESSING, SHIPPING, DELIVERED, CANCELLED.
+  - PaymentMethod: COD, BANK_TRANSFER, WALLET, CARD.
+  - NotificationType: ORDER, SHIPPING, PROMOTION, SYSTEM, MESSAGE.
+  - ConversationStatus: OPEN, CLOSED.
+
+  Coding conventions:
+  - Keep package structure under quynh.ecommerce.moonshop by capability: auth, user, common, config, admin, etc.
+  - Preserve the existing controller/service/repository/DTO/entity layering.
+  - Use request and response DTOs for external API payloads; do not expose entities directly from controllers.
+  - Use @Valid on request bodies with jakarta.validation annotations in DTOs.
+  - Use AppException and ErrorCode for expected business errors.
+  - Keep authorization rules aligned with SecurityConfig and application.properties endpoint groups.
+  - Keep changes scoped to the OpenSpec change being applied; do not implement unrelated API sections from the large API spec.
+
+rules:
+  proposal:
+    - State whether the change implements an API section from API_SPEC_DETAILED.md or changes existing implemented behavior.
+    - Include scope and non-goals, especially when the API spec describes adjacent features that will remain unimplemented.
+    - Call out compatibility impact for frontend routes, request/response shapes, auth roles, and error codes.
+    - Mention any new infrastructure dependency, such as Redis, RabbitMQ, Mail, or Cloudinary.
+
+  specs:
+    - Write requirements using externally observable API behavior, not internal implementation steps.
+    - Include endpoint path, HTTP method, auth requirement, request validation, success response, and error scenarios when relevant.
+    - Use existing enum names and error codes from the project unless the change explicitly adds new ones.
+    - Keep delta specs focused on the capability being changed; do not copy large sections from API_SPEC_DETAILED.md wholesale.
+    - For brand-new capabilities, seed Purpose from the product intent in API_SPEC_DETAILED.md and keep it concise.
+
+  design:
+    - Describe controller, service, repository, entity, DTO, mapper, security, and configuration changes separately when applicable.
+    - Identify database model changes and whether they rely on Hibernate ddl-auto=update or require explicit migration work.
+    - Note transaction boundaries for order/cart/payment-like flows.
+    - Note async/event behavior for RabbitMQ, notification, and mail features; consumers must not fail the primary transaction.
+    - For security-sensitive changes, describe JWT claims, role checks, token invalidation, and blocked-user handling.
+    - If the design depends on a library not already in pom.xml, state the dependency and why it is needed.
+
+  tasks:
+    - "Break work into small implementation tasks ordered by layer: domain/entity, repository, DTO/mapper, service, controller, security/config, tests/docs."
+    - Include focused test tasks for validation, authorization, business errors, and happy paths.
+    - Include a task to run the relevant Maven verification command before marking implementation complete.
+    - Do not mark broad API sections as one task; split product/cart/order/admin work by endpoint group or behavior.
+
+operations:
+  apply:
+    guidance:
+      - Before editing, compare the OpenSpec artifacts with API_SPEC_DETAILED.md and the current source tree.
+      - Keep implementation minimal for the selected change; do not fill unrelated API gaps opportunistically.
+      - Update task checkboxes only after code changes and relevant verification for that task are complete.
+      - Prefer ./mvnw test for broad verification, or targeted Maven tests when the change is narrow.
+
+  archive:
+    guidance:
+      - Confirm implementation tasks are complete and specs have been synced before archiving.
+      - Summarize which API capability was finalized and whether main specs changed.
