@@ -1,4 +1,4 @@
-package quynh.ecommerce.moonshop.admin.controller;
+package quynh.ecommerce.moonshop.admin.auth;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ import java.util.List;
 
 @RestApiV1
 @RequiredArgsConstructor
-public class AdminController {
+public class AdminAuthController {
     private final AuthService authService;
     private final UserService userService;
 
