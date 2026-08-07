@@ -26,8 +26,16 @@ public class UrlConstant {
         private static final String PRE_FIX = "/admin";
         public static final String LOGIN = PRE_FIX + "/login";
         public static final String ALL_USER = PRE_FIX + "/users";
+        public static final String CATEGORIES = PRE_FIX + "/categories";
+        public static final String CATEGORY_BY_ID = CATEGORIES + "/{id}";
 
     }
 
+    public static class Category {
+        public static final String CATEGORIES = "/categories";
+
+        private Category() {
+        }
+    }
 
 }
