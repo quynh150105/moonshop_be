@@ -28,6 +28,8 @@ public class UrlConstant {
         public static final String ALL_USER = PRE_FIX + "/users";
         public static final String CATEGORIES = PRE_FIX + "/categories";
         public static final String CATEGORY_BY_ID = CATEGORIES + "/{id}";
+        public static final String PRODUCTS = PRE_FIX + "/products";
+        public static final String PRODUCT_BY_ID = PRODUCTS + "/{id}";
 
     }
 
@@ -35,6 +37,16 @@ public class UrlConstant {
         public static final String CATEGORIES = "/categories";
 
         private Category() {
+        }
+    }
+
+    public static class Product {
+        public static final String PRODUCTS = "/products";
+        public static final String PRODUCT_BY_ID_OR_SLUG = PRODUCTS + "/{idOrSlug}";
+        public static final String SEARCH = PRODUCTS + "/search";
+        public static final String SUGGESTIONS = PRODUCTS + "/suggestions";
+
+        private Product() {
         }
     }
 

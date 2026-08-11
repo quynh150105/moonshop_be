@@ -35,5 +35,6 @@ build/
 
 API_SPEC_DETAILED.md
 BE_API_Spec_LovaMart.doc
+BACKEND_CONTRACT.md
 *.doc
 *.docx

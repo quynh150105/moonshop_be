@@ -19,6 +19,10 @@ public enum ErrorCode {
 
     CATEGORY_SLUG_ALREADY_EXISTS(HttpStatus.CONFLICT, "Category slug already exists"),
 
+    PRODUCT_NOT_FOUND(HttpStatus.NOT_FOUND, "Product not found"),
+
+    PRODUCT_SLUG_ALREADY_EXISTS(HttpStatus.CONFLICT, "Product slug already exists"),
+
     INVALID_CURRENT_PASSWORD(HttpStatus.BAD_REQUEST, "Current password is invalid"),
 
     INVALID_USERNAME_OR_PASSWORD(HttpStatus.UNAUTHORIZED,
