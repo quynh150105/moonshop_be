@@ -13,6 +13,7 @@ import java.time.LocalDate;
 public class AdminProductResponse {
     private String id;
     private String name;
+    private String slug;
     private String description;
     private String image;
     private String imagePublicId;

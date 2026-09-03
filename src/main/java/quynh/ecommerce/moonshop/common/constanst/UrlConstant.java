@@ -50,4 +50,16 @@ public class UrlConstant {
         }
     }
 
+    public static class Cart {
+        public static final String CART = "/cart";
+        public static final String CART_ITEM = CART + "/{productId}";
+        public static final String CART_ITEM_SELECTED = CART_ITEM + "/selected";
+        public static final String SELECT_ALL = CART + "/select-all";
+        public static final String MERGE = CART + "/merge";
+        public static final String VALIDATE = CART + "/validate";
+
+        private Cart() {
+        }
+    }
+
 }
