@@ -62,4 +62,13 @@ public class UrlConstant {
         }
     }
 
+    public static class Address {
+        public static final String ADDRESSES = "/profile/addresses";
+        public static final String ADDRESS_BY_ID = ADDRESSES + "/{id}";
+        public static final String DEFAULT_ADDRESS = ADDRESS_BY_ID + "/default";
+
+        private Address() {
+        }
+    }
+
 }

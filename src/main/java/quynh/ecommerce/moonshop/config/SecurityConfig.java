@@ -43,6 +43,8 @@ public class SecurityConfig {
     private final String[] USER_ENDPOINTS = {
             "/api/cart",
             "/api/cart/**",
+            "/api/profile/addresses",
+            "/api/profile/addresses/**",
             "/api/orders",
             "/api/orders/**",
             "/api/chat",

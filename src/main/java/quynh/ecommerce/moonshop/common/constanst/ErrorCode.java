@@ -25,6 +25,8 @@ public enum ErrorCode {
 
     CART_ITEM_NOT_FOUND(HttpStatus.NOT_FOUND, "Cart item not found"),
 
+    ADDRESS_NOT_FOUND(HttpStatus.NOT_FOUND, "Address not found"),
+
     INVALID_CURRENT_PASSWORD(HttpStatus.BAD_REQUEST, "Current password is invalid"),
 
     INVALID_USERNAME_OR_PASSWORD(HttpStatus.UNAUTHORIZED,
